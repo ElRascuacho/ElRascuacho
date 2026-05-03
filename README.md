@@ -5,7 +5,7 @@
 <hr />
 
 <div>
-  <img src='https://readme-typing-svg.demolab.com/demo/?font=Space+Mono&weight=200&color=58a6ff&lines=My+stack!' alt='Typing SVG - My Stack!' />
+  <img src='https://readme-typing-svg.demolab.com?font=Space+Mono&pause=1000&color=58a6ff&center=true&width=435&lines=My+stack!' alt='Typing SVG - My Stack!' />
 </div>
 
 <a href="https://skillicons.dev">
@@ -15,7 +15,7 @@
 <hr />
 
 <div>
-  <img src='https://readme-typing-svg.demolab.com/demo/?font=Space+Mono&weight=200&color=58a6ff&lines=My+Contributions!' alt='Typing SVG - My Contributions!' />
+  <img src='https://readme-typing-svg.demolab.com?font=Space+Mono&pause=1000&color=58a6ff&center=true&width=435&lines=My+Contributions!' alt='Typing SVG - My Contributions!' />
 </div>
 
 <div align="center">
