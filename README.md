@@ -193,22 +193,6 @@ flowchart LR
   </picture>
 </p>
 
-<details>
-  <summary><strong>Como esta construido este perfil</strong></summary>
-  <br>
-
-Este README usa una mezcla de contenido curado y componentes dinamicos:
-
-| Capa | Servicio / tecnica |
-|---|---|
-| Banner y dashboard local | SVG generado por GitHub Actions desde `scripts/generate-profile-assets.mjs` |
-| Animacion de contribuciones | `Platane/snk` publicando a la rama `output` |
-| Estadisticas y cards | `github-readme-stats`, `streak-stats`, `activity-graph`, `profile-trophy` |
-| Navegacion expandible | `<details>` nativo de GitHub |
-| Diagramas | Mermaid renderizado por GitHub |
-
-</details>
-
 <p align="center">
   <strong>Abierto a colaborar en productos web, automatizacion, IA aplicada y sistemas que necesiten claridad tecnica desde el primer prototipo.</strong>
 </p>
