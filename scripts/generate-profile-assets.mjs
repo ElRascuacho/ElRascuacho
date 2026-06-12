@@ -1,0 +1,128 @@
+import { mkdir, writeFile } from "node:fs/promises";
+
+const outDir = new URL("../assets/", import.meta.url);
+await mkdir(outDir, { recursive: true });
+
+const now = new Date();
+const updated = new Intl.DateTimeFormat("en", {
+  year: "numeric",
+  month: "short",
+  day: "2-digit",
+  timeZone: "America/Guayaquil",
+}).format(now);
+
+const esc = (value) =>
+  String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+
+const banner = `<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1280" height="430" viewBox="0 0 1280 430" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Isaac Mateo Gonzalez Reina profile banner</title>
+  <desc id="desc">A cyber product engineering banner for Mateo's GitHub profile.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="430" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#07111F"/>
+      <stop offset="0.45" stop-color="#101820"/>
+      <stop offset="1" stop-color="#16112B"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#00D4FF"/>
+      <stop offset="1" stop-color="#7CFFB2"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" stroke="#FFFFFF" stroke-opacity="0.055"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="430" rx="34" fill="url(#bg)"/>
+  <rect width="1280" height="430" rx="34" fill="url(#grid)"/>
+  <path d="M0 318C165 250 266 393 430 328C592 264 636 84 810 104C1000 126 1038 296 1280 198" stroke="#00D4FF" stroke-opacity=".18" stroke-width="3"/>
+  <path d="M0 364C194 306 270 414 458 360C646 306 712 184 878 192C1038 200 1098 318 1280 286" stroke="#7CFFB2" stroke-opacity=".16" stroke-width="3"/>
+
+  <g transform="translate(70 70)">
+    <rect x="0" y="0" width="1140" height="290" rx="28" fill="#0B1220" fill-opacity=".72" stroke="#FFFFFF" stroke-opacity=".12"/>
+    <text x="44" y="66" fill="#7CFFB2" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="3">SOFTWARE ENGINEERING / PRODUCT BUILDER</text>
+    <text x="42" y="132" fill="#FFFFFF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="58" font-weight="800">Isaac Mateo Gonzalez Reina</text>
+    <text x="44" y="178" fill="#B9C7D9" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="25">Web, mobile, automation and AI-assisted systems from Ecuador.</text>
+
+    <g transform="translate(44 218)">
+      <rect width="172" height="44" rx="22" fill="#00D4FF" fill-opacity=".16" stroke="#00D4FF" stroke-opacity=".55"/>
+      <text x="22" y="29" fill="#E7FBFF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="17" font-weight="700">Full-stack</text>
+      <rect x="190" width="196" height="44" rx="22" fill="#7CFFB2" fill-opacity=".14" stroke="#7CFFB2" stroke-opacity=".5"/>
+      <text x="212" y="29" fill="#EDFFF4" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="17" font-weight="700">Applied AI</text>
+      <rect x="408" width="216" height="44" rx="22" fill="#FFB86B" fill-opacity=".14" stroke="#FFB86B" stroke-opacity=".5"/>
+      <text x="430" y="29" fill="#FFF4E8" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="17" font-weight="700">Data products</text>
+      <rect x="646" width="252" height="44" rx="22" fill="#C792EA" fill-opacity=".14" stroke="#C792EA" stroke-opacity=".5"/>
+      <text x="668" y="29" fill="#FAF0FF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="17" font-weight="700">UX-minded delivery</text>
+    </g>
+  </g>
+
+  <g transform="translate(997 83)" filter="url(#glow)">
+    <circle cx="94" cy="94" r="76" fill="#00D4FF" fill-opacity=".12" stroke="url(#cyan)" stroke-width="3"/>
+    <path d="M54 105L82 133L137 61" stroke="url(#cyan)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <text x="70" y="397" fill="#6D7F94" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="16">Auto-generated profile asset - Updated ${esc(updated)} - America/Guayaquil</text>
+</svg>
+`;
+
+const dashboard = `<?xml version="1.0" encoding="UTF-8"?>
+<svg width="560" height="360" viewBox="0 0 560 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Mateo engineering dashboard</title>
+  <desc id="desc">A compact SVG dashboard showing product, backend, data and AI focus areas.</desc>
+  <defs>
+    <linearGradient id="panel" x1="0" y1="0" x2="560" y2="360">
+      <stop stop-color="#0B1220"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#00D4FF"/>
+      <stop offset="1" stop-color="#7CFFB2"/>
+    </linearGradient>
+  </defs>
+  <rect width="560" height="360" rx="24" fill="url(#panel)"/>
+  <rect x="1" y="1" width="558" height="358" rx="23" stroke="#FFFFFF" stroke-opacity=".12"/>
+  <text x="34" y="52" fill="#FFFFFF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="24" font-weight="800">Builder map</text>
+  <text x="34" y="78" fill="#8EA0B8" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="14">Systems I like to ship end to end</text>
+
+  ${[
+    ["Frontend UX", 34, 112, 440, "#00D4FF"],
+    ["APIs + auth", 34, 162, 392, "#7CFFB2"],
+    ["Data models", 34, 212, 368, "#FFB86B"],
+    ["AI workflows", 34, 262, 330, "#C792EA"],
+  ]
+    .map(
+      ([label, x, y, w, color]) => `
+  <text x="${x}" y="${y - 10}" fill="#DCE7F5" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="14" font-weight="700">${label}</text>
+  <rect x="${x}" y="${y}" width="492" height="16" rx="8" fill="#1F2937"/>
+  <rect x="${x}" y="${y}" width="${w}" height="16" rx="8" fill="${color}"/>
+`,
+    )
+    .join("")}
+
+  <g transform="translate(380 40)">
+    <rect width="132" height="82" rx="18" fill="#00D4FF" fill-opacity=".11" stroke="#00D4FF" stroke-opacity=".28"/>
+    <text x="22" y="34" fill="#E7FBFF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="13" font-weight="700">Mode</text>
+    <text x="22" y="59" fill="#FFFFFF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="18" font-weight="800">Ship MVP</text>
+  </g>
+  <g transform="translate(380 244)">
+    <rect width="132" height="72" rx="18" fill="#7CFFB2" fill-opacity=".10" stroke="#7CFFB2" stroke-opacity=".25"/>
+    <text x="22" y="30" fill="#EDFFF4" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="13" font-weight="700">Focus</text>
+    <text x="22" y="54" fill="#FFFFFF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="18" font-weight="800">Clarity</text>
+  </g>
+</svg>
+`;
+
+await writeFile(new URL("profile-banner.svg", outDir), banner, "utf8");
+await writeFile(new URL("profile-dashboard.svg", outDir), dashboard, "utf8");
+
+console.log("Generated assets/profile-banner.svg and assets/profile-dashboard.svg");

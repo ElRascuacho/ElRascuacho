@@ -1,0 +1,38 @@
+name: Profile assets
+
+on:
+  schedule:
+    - cron: "15 10 * * 1"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "scripts/generate-profile-assets.mjs"
+      - ".github/workflows/profile-assets.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Generate SVG assets
+        run: node scripts/generate-profile-assets.mjs
+
+      - name: Commit generated assets
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: refresh profile assets"
+          file_pattern: assets/*.svg
